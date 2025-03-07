@@ -1,0 +1,194 @@
+{% extends 'shop/layout/main.html' %}
+
+{% block title %}
+Shopfy | Home
+{% endblock title %}
+
+{% block content %}
+{% include 'shop/inc/slide.html' %}
+{% include 'shop/inc/messages.html' %}
+<div class="side-header">
+    <img src="https://cdn-icons-png.flaticon.com/512/3081/3081840.png" alt="Products Icon" class="header-icon ml-3">
+    <h1 class="fw-bold ml-3">  Latest Products</h1>
+    <div class="divider"></div>
+
+</div>
+
+
+
+<div class="container my-5">
+    <div class="row justify-content-start g-4">
+        {% for item in product %}
+            <div class="col-lg-3 col-md-6 col-sm-12 fade-in">
+                <div class="product-card">
+                        <a class="product" href="{% url 'product_details' item.category.name item.name %}">
+                        <div class="product-image">
+                            <img src="{{ item.product_image.url }}" alt="{{ item.name }}">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">{{ item.name }}</div>
+                            <div class="price">
+                                <span class="original-price">₹{{ item.original_price }}</span>
+                                <span class="selling-price">₹{{ item.selling_price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .product-card {
+        background: linear-gradient(135deg, #ffffff, #fcfcfc);
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+        overflow: hidden;
+        position: relative;
+        height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .product-card > .product{
+        text-decoration: none
+    }
+    .product-card:hover {
+        transform: translateY(-8px) scale(1.07);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+    }
+    .product-image {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+    .product-image img {
+        width: auto;
+        height: 100%;
+        max-width: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease-in-out;
+    }
+    .product-card:hover .product-image img {
+        transform: scale(1.15);
+    }
+    .product-info {
+        padding: 15px 0;
+    }
+    .product-name {
+        font-size: 22px;
+        font-weight: bold;
+        color: #343a40;
+        transition: color 0.4s ease-in-out;
+    }
+    .product-card:hover .product-name {
+        color: #0a6ecb;
+    }
+    .price {
+        font-size: 18px;
+    }
+    .original-price {
+        text-decoration: line-through;
+        color: #999;
+        margin-right: 5px;
+    }
+    .selling-price {
+        color: #d9534f;
+        font-weight: bold;
+    }
+    .side-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+    border-bottom: 3px solid #dee0e2cc;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.divider {
+    flex-grow: 1;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #e4dedcc4, transparent);
+    margin: 0 15px;
+}
+
+.header-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+@keyframes laser-glow {
+    from {
+        opacity: 0.5;
+        transform: scaleX(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1.2);
+    }
+}
+
+    @keyframes slide-in {
+        from {
+            transform: translateX(-120%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    .fade-in {
+    opacity: 0;
+    transform: translateX(-50px); /* Start position (off-screen to the left) */
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateX(0); /* Moves to the normal position */
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let fadeInElements = document.querySelectorAll(".fade-in");
+
+    function handleScroll() {
+        fadeInElements.forEach(el => {
+            let rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+                el.classList.add("visible");
+            } else {
+                el.classList.remove("visible"); // Reset to replay animation
+            }
+        });
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Ensure animations run on page load
+    setTimeout(() => handleScroll(), 500); // Ensures animation runs on refresh
+});
+
+</script>
+
+{% endblock content %}

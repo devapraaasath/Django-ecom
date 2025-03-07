@@ -1,0 +1,140 @@
+{% extends 'shop/layout/main.html'%}
+{% block title%}
+shopy | login
+{% endblock title%}
+
+{% block script%}
+{% include 'shop/inc/messages.html' %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row justify-content-center w-100">
+        <div class="col-lg-5 col-md-6 col-sm-10">
+            <div class="card glassmorphism">
+                <div class="card-header text-center">
+                    <h3 class="fw-bold text-info">Login</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        
+                      
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label text-warning fw-bold">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
+                        
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label text-warning fw-bold">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                        </div>
+
+                        <button type="submit" class="btn btn-glass btn-block">Login</button>
+
+                        <div class="text-center text-white fw-bolder mt-3">
+                            Don't have an account? <a class="text-info text-decoration-none fw-bold" href="{% url 'register' %}">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Body background for contrast */
+    body {
+        background: linear-gradient(135deg, #1e1e2f, #2a2a3b);
+        color: white;
+    }
+
+    /* Glassmorphism Card */
+    .glassmorphism {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        padding: 25px;
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    /* Styling Form Fields */
+    .form-control {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 16px;
+        color: white;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Button Styling */
+    .btn-glass {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        border: none;
+        border-radius: 15px;
+        padding: 12px;
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: 0.3s ease-in-out;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .btn-glass:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+    }
+
+    /* Fade-In Animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .col-lg-5 {
+            max-width: 80%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .col-md-6 {
+            max-width: 90%;
+        }
+
+        .glassmorphism {
+            padding: 20px;
+        }
+
+        .btn-glass {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .col-sm-10 {
+            max-width: 95%;
+        }
+
+        .glassmorphism {
+            padding: 15px;
+        }
+
+        .btn-glass {
+            font-size: 14px;
+            padding: 10px;
+        }
+    }
+</style>
+
+{% endblock script %}

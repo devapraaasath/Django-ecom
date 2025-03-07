@@ -1,0 +1,195 @@
+{% extends 'shop/layout/main.html' %}
+{% block title %} Shopy | Favourites {% endblock title %}
+
+{% block script %}
+<div class="fav-container">
+    <h2>Your Favourites 💖</h2>
+    <div class="fav-grid">
+        {% for item in fav %}
+        <div class="fav-item">
+            <div class="fav-image-wrapper">
+                <img src="{{ item.Product.product_image.url }}" alt="Product">
+                <a href="{% url 'remove_fav' item.id %}" class="remove-icon" onclick="return confirm('Remove this item?')">✖</a>
+            </div>
+            <div class="fav-details">
+                <h3>{{ item.Product.name }}</h3>
+                <p class="price">₹{{ item.Product.selling_price | stringformat:'d' }}</p>
+                <a href="#" class="buy-now">Buy Now</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* General Styling */
+    body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f9f9f9;
+    }
+
+    .fav-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Grid Layout */
+    .fav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    /* Favourite Card */
+    .fav-item {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: 0.3s ease-in-out;
+        overflow: hidden;
+        text-align: center;
+        padding-bottom: 15px;
+        max-width: 260px;
+        margin: auto;
+    }
+
+    .fav-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Image Wrapper */
+    .fav-image-wrapper {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: #f0f0f0;
+    }
+
+    .fav-image-wrapper img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+    }
+
+    /* Remove Icon */
+    .remove-icon {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .remove-icon:hover {
+        background: rgba(255, 0, 0, 1);
+    }
+
+    /* Favourite Details */
+    .fav-details {
+        padding: 15px;
+    }
+
+    .fav-details h3 {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .fav-details .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #0078d7;
+        margin-bottom: 10px;
+    }
+
+    /* Buy Now Button */
+    .buy-now {
+        display: inline-block;
+        padding: 8px 15px;
+        background: #28a745;
+        color: white;
+        border-radius: 8px;
+        font-size: 14px;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+    }
+
+    .buy-now:hover {
+        background: #218838;
+        transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .fav-grid {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .fav-item {
+            max-width: 200px;
+        }
+
+        .fav-image-wrapper {
+            height: 180px;
+        }
+
+        .fav-details h3 {
+            font-size: 16px;
+        }
+
+        .remove-icon {
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+        }
+
+        .buy-now {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+    }
+</style>
+
+{% endblock script %}

@@ -1,0 +1,247 @@
+{% extends 'shop/layout/main.html' %}
+
+{% block title %}
+Shopfy | Home
+{% endblock title %}
+
+{% block content %}
+    <div class="page-header">
+        <div class="header-overlay">
+            <h1>{{category_name}} Collection</h1>
+            <p>Exclusive Deals & Trendy Picks Just for You</p>
+        </div>
+    </div>
+
+
+        <!-- Product Grid Wrapper (Fixed Position) -->
+        <div class="product-grid">
+            {% for item in products %}
+            <a href="{% url 'product_details' category_name item.name%}">
+                <div class="product-card">
+                    {% if item.product_image %}
+                        <img src="{{ item.product_image.url }}" alt="{{ item.name }}" class="product-image">
+                    {% else %}
+                        <img src="/static/uploads/default.jpg" alt="No Image Available" class="product-image">
+                    {% endif %}
+                    <div class="product-details">
+                        <h3 class="product-name">{{ item.name }}</h3>
+                        <div class="price-container">
+                            <span class="original-price">₹{{ item.original_price }}</span>
+                            <span class="offer-price">₹{{ item.selling_price }}</span>
+                        </div>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </div>
+    </a>
+
+    <!-- Updated CSS -->
+    <style>
+       
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #F8F9FA;
+    }
+/* Page Header - Fully Transparent with Animations */
+.page-header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+/* Header Content */
+.header-overlay {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: auto;
+}
+
+/* Title Styling */
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #BB86FC; /* Soft Neon Purple */
+    text-shadow: 0px 0px 20px rgba(187, 134, 252, 0.6); /* Subtle Glow */
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Subtitle Styling */
+.page-header p {
+    font-size: 1.4rem;
+    opacity: 0.9;
+    color: #E0E0E0;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+    margin-top: 15px;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1.4s ease-out forwards;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #03DAC6; /* Soft Neon Cyan */
+    font-weight: bold;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.breadcrumb a:hover {
+    color: #FF5722; /* Vibrant Orange */
+    transform: scale(1.1);
+}
+
+.breadcrumb span {
+    color: #E0E0E0;
+    margin: 0 5px;
+}
+
+.current {
+    font-weight: bold;
+    color: #BB86FC; /* Matches Title */
+}
+
+/* Fade-in Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+    /* Product Grid Layout */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 50px 20px;
+        justify-items: center;
+    }
+
+    /* Product Card */
+    .product-card {
+        width: 100%;
+        max-width: 280px;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Product Image */
+    .product-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    /* Product Details */
+    .product-details {
+        padding: 15px;
+        text-align: center;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .product-name {
+        font-weight: 600;
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        flex-grow: 1;
+    }
+
+    /* Price Styling */
+    .price-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .original-price {
+        text-decoration: line-through;
+        color: #757575;
+        font-size: 0.9rem;
+    }
+    .offer-price {
+        color: #FF5722;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    /* Add to Cart Button */
+    .add-to-cart {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #009688 0%, #1976D2 100%);
+        color: white;
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-radius: 0 0 15px 15px;
+        margin-top: auto;
+    }
+    .add-to-cart:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+
+    /* Responsive Grid */
+    @media (min-width: 1200px) {
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1199px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 767px) {
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+
+    </style>
+{% endblock content %}

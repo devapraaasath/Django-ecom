@@ -1,0 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html{
+    font-size: 15px;
+
+}
+body {
+    font-family:'Montserrat','sans-serif' ;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration:none;
+}
+
+.carousel-item img{
+    object-fit:cover ;
+    object-position: top;
+    height: 80vh;
+    overflow: hidden;
+}
+
