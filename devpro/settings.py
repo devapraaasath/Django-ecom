@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
+import environ
+import pymysql
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -75,17 +77,22 @@ WSGI_APPLICATION = 'devpro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+pymysql.install_as_MySQLdb()  # Required if using pymysql
+
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env(os.path.join(os.path.dirname(__file__), "../.env"))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shop_dev',
-        'HOST': 'localhost',
-        'USER':'root',
-        'PASSWORD':'2311',
-        'PORT':'3306',
+        'NAME': env('MYSQL_ADDON_DB'),
+        'USER': env('MYSQL_ADDON_USER'),
+        'PASSWORD': env('MYSQL_ADDON_PASSWORD'),
+        'HOST': env('MYSQL_ADDON_HOST'),
+        'PORT': env('MYSQL_ADDON_PORT', default='3306'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -120,15 +127,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+import os
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL='/images/'
-MEDIA_ROOT=BASE_DIR/'static'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATICFILES_DIRS=[
-    BASE_DIR/'static'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
 ]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

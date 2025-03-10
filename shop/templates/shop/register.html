@@ -1,61 +1,57 @@
-{% extends 'shop/layout/main.html'%}
-{% block title%}
-shopy | registration
-{% endblock title%}
+{% extends 'shop/layout/main.html' %}
+{% block title %}shopy | Registration{% endblock title %}
 
-{% block script%}
+{% block script %}
 {% include 'shop/inc/messages.html' %}
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="row justify-content-center w-100">
         <div class="col-lg-5 col-md-6 col-sm-10">
-            <div class="card glassmorphism">
-                <div class="card-header text-center">
-                    <h3 class="fw-bold text-info">Register</h3>
+            <div class="card shadow-sm border-0 rounded-3 p-4" style="background-color: #ffffff;">
+                <div class="card-header bg-white border-0 text-center">
+                    <h3 class="fw-bold text-dark">Register</h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" action=" ">
+                    <form method="post" action="">
                         {% csrf_token %}
-                        
-                        <!-- Custom Django Form Rendering -->
-                        <div class="form-group">
-                            <label for="{{ form.username.id_for_label }}" class="form-label text-warning fw-bold ">Username</label>
+
+                        <div class="form-group mb-3">
+                            <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
                             {{ form.username }}
                             {% if form.errors.username %}
-                            <label class="text-danger">{{form.errors.username}}</label>
+                            <small class="text-danger">{{ form.errors.username }}</small>
                             {% endif %}
                         </div>
                         
-                        <div class="form-group"> 
-                            <label for="{{ form.email.id_for_label }} " class="form-label text-warning fw-bold">Email</label>
-                            {{ form.Email}}
-                            {% if form.errors.Email%}
-                            <label class="text-danger">{{form.errors.Email}}</label>
+                        <div class="form-group mb-3">
+                            <label for="{{ form.Email.id_for_label }}" class="form-label">Email</label>
+                            {{ form.Email }}
+                            {% if form.errors.Email %}
+                            <small class="text-danger">{{ form.errors.Email }}</small>
                             {% endif %}
                         </div>
                         
-                        <div class="form-group">
-                            <label for="{{ form.password1.id_for_label }}"  class="form-label text-warning fw-bolder ">Password</label>
-                            {{ form.password1 }}
+                        <div class="form-group mb-3">
+                            <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
+                            {{ form.password1}}
                             {% if form.errors.password1 %}
-                            <label class="text-danger">{{form.errors.password1}}</label>
-                            {% endif%}
+                            <small class="text-danger">{{ form.errors.password1 }}</small>
+                            {% endif %}
                         </div>
                         
-                        <div class="form-group">
-                            <label for="{{ form.password2.id_for_label }}"  class="form-label text-warning fw-bold ">Confirm Password</label>
-                            {{ form.password2 }}
+                        <div class="form-group mb-3">
+                            <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm Password</label>
+                            {{ form.password2}}
                             {% if form.errors.password2 %}
-                            <label class="text-danger">{{form.errors.password2}}</label>
+                            <small class="text-danger">{{ form.errors.password2 }}</small>
                             {% endif %}
                         </div>
 
-                        <button type="submit" class="btn btn-glass btn-block" >Register</button>
-
-                        <div class="text-center text-white fw-bolder mt-3 ">
-                            already user ? <a class="text-info text-decoration-none  fw-bold"   href="{% url 'login' %} "> login</a>
+                        <button type="submit" class="btn w-100 text-white rounded-3" style="background-color: #ff6f61;">Register</button>
+                        
+                        <div class="text-center mt-3">
+                            <small>Already a user? <a class="text-decoration-none" href="{% url 'login' %}" style="color: #ff6f61;">Login</a></small>
                         </div>
                     </form>
-                
                 </div>
             </div>
         </div>
@@ -63,101 +59,25 @@ shopy | registration
 </div>
 
 <style>
-    /* Body background for contrast */
     body {
-        background: linear-gradient(135deg, #1e1e2f, #2a2a3b);
-        color: white;
+        background-color: #f8f9fa;
+        color: #212529;
     }
-
-    /* Glassmorphism Card */
-    .glassmorphism {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        backdrop-filter: blur(20px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        padding: 25px;
-        animation: fadeIn 0.8s ease-in-out;
-    }
-
-    /* Styling Django Form Fields */
-    input, select, textarea {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.15);
-        border: none;
-        border-radius: 12px;
-        padding: 12px;
-        font-size: 16px;
-        color: white;
+    
+    .form-control {
+        border: 1px solid #ced4da;
+        padding: 10px;
         transition: all 0.3s ease-in-out;
     }
-
-    input:focus, select:focus, textarea:focus {
-        outline: none;
-        background: rgba(255, 255, 255, 0.3);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    
+    .form-control:focus {
+        border-color: #ff6f61;
+        box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
     }
-
-    /* Button Styling */
-    .btn-glass {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-        border: none;
-        border-radius: 15px;
-        padding: 12px;
-        font-size: 18px;
-        color: white;
-        font-weight: bold;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        transition: 0.3s ease-in-out;
-        width: 100%;
-        margin-top: 15px;
-    }
-
-    .btn-glass:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(1.05);
-    }
-
-    /* Fade-In Animation */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-        .col-lg-5 {
-            max-width: 80%;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .col-md-6 {
-            max-width: 90%;
-        }
-
-        .glassmorphism {
-            padding: 20px;
-        }
-
-        .btn-glass {
-            font-size: 16px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .col-sm-10 {
-            max-width: 95%;
-        }
-
-        .glassmorphism {
-            padding: 15px;
-        }
-
-        .btn-glass {
-            font-size: 14px;
-            padding: 10px;
-        }
+    
+    button:hover {
+        background-color: #e65b50 !important;
     }
 </style>
 
-{% endblock script%}
+{% endblock script %}

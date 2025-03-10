@@ -1,118 +1,176 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shopy - Professional Navbar</title>
+  <title>Shopy - Material Navbar</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-        integrity="sha512-papNM6V4hzAy3C0U7KO5oCYF9lf0/E+wndIcPojl69SLeB/1BJmXtZr4F6xkWhXhpdHbH4XZw32o0DZw1L+w2Q==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Google Font: Poppins (Clean & Modern) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
-    /* CSS Variables for easy future upgrades */
+    /* Material Design Variables */
     :root {
-      --navbar-bg-start: #131313;
-      --navbar-bg-end: #252525;
-      --navbar-text: #E0E0E0;
-      --navbar-hover: #ffc107;
+      --primary-color: #6200ea;
+      --secondary-color: #3700b3;
+      --text-color: #333;
+      --hover-bg: rgba(98, 0, 234, 0.1);
+      --active-underline: #6200ea;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+            .logo {
+          height: 50px; /* Increase this value for a bigger logo */
+          width: auto; /* Keeps the aspect ratio */
+          max-width: 160px; /* Increase if necessary */
+           /* Ensures clarity */
+          object-fit:contain;
+        }
+      .logo:hover {
+        transform: scale(1.1);
+      }
+
+    /* Material Navbar Styling */
+    .navbar {
+      background: white;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0px 2px 10px var(--shadow-light);
+      transition: all 0.3s ease-in-out;
     }
 
-    /* Navbar Custom Styles */
-    .navbar {
-      background: linear-gradient(135deg, var(--navbar-bg-start) 0%, var(--navbar-bg-end) 100%);
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color) !important;
+      text-transform: uppercase;
     }
-    
-    .navbar-brand,
-    .nav-link {
-      font-size: 1.1rem;
-      color: var(--navbar-text) !important;
-      transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    .navbar-nav .nav-link {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-color) !important;
+      position: relative;
+      padding: 8px 15px;
+      transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
     }
-    
-    .navbar-brand:hover,
-    .nav-link:hover {
-      transform: translateY(-2px);
-      color: var(--navbar-hover) !important;
+
+    /* Hover & Active Effects */
+    .navbar-nav .nav-link:hover {
+      background: var(--hover-bg);
+      border-radius: 5px;
     }
-    
+
+    .navbar-nav .nav-link::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--active-underline);
+      transition: width 0.3s ease-in-out;
+      margin: auto;
+    }
+
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Navbar Dropdown */
+    .navbar-nav .dropdown-menu {
+      border: none;
+      box-shadow: 0px 4px 10px var(--shadow-dark);
+    }
+
+    .dropdown-item {
+      font-size: 0.9rem;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .dropdown-item:hover {
+      background: var(--hover-bg);
+    }
+
+    /* Material UI Button Effects */
     .navbar-toggler {
       border: none;
-      outline: none;
+      background: transparent;
       transition: transform 0.3s ease-in-out;
     }
-    
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
     .navbar-toggler:hover {
       transform: rotate(90deg);
     }
-    
-    /* Adjust nav item spacing on smaller screens */
+
+    /* Responsive Mobile Adjustments */
     @media (max-width: 991px) {
       .navbar-nav {
         text-align: center;
-      }
-      .nav-link {
-        padding: 10px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Upgraded Navbar -->
+  <!-- Material Design Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">
-        <i class="fas fa-store"></i> Shopy
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+        <img src="{% static 'images/logo1.png' %}" alt="Shopy Logo" class="logo">
       </a>
-      <button class="navbar-toggler collapsed" type="button" 
+      <button class="navbar-toggler" type="button" 
               data-bs-toggle="collapse" data-bs-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" 
               aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
+        <span class="material-icons">menu</span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'home' %}">
-              <i class="fas fa-home"></i> Home
+              <span class="material-icons">home</span> Home
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'collections' %}">
-              <i class="fas fa-th-large"></i> Collections
+              <span class="material-icons">grid_view</span> Collections
             </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'fav_page' %}">
-              <i class="fas fa-heart"></i> favourite
+              <span class="material-icons">favorite</span> Favourite
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'cart_page' %}">
-              <i class="fas fa-shopping-cart"></i> Cart
+              <span class="material-icons">shopping_cart</span> Cart
             </a>
           </li>
           {% if request.user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <i class="fas fa-user"></i> {{ request.user }}
+                <span class="material-icons">person</span> {{ request.user }}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">
-                <i class="fas fa-sign-out-alt"></i> Logout
+                <span class="material-icons">logout</span> Logout
               </a>
             </li>
           {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'register' %}">
-                <i class="fas fa-user-plus"></i> Register
+                <span class="material-icons">person_add</span> Register
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">
-                <i class="fas fa-sign-in-alt"></i> Login
+                <span class="material-icons">login</span> Login
               </a>
             </li>
           {% endif %}
@@ -123,21 +181,5 @@
 
   <!-- Bootstrap 5 JS Bundle (includes Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Toggle between hamburger and close icons
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const togglerIcon = navbarToggler.querySelector('i');
-
-    navbarToggler.addEventListener('click', function () {
-      const isExpanded = navbarToggler.getAttribute('aria-expanded') === 'true';
-      if (isExpanded) {
-        togglerIcon.classList.remove('fa-times');
-        togglerIcon.classList.add('fa-bars');
-      } else {
-        togglerIcon.classList.remove('fa-bars');
-        togglerIcon.classList.add('fa-times');
-      }
-    });
-  </script>
 </body>
 </html>

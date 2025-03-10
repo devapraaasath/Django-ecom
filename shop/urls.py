@@ -15,5 +15,6 @@ urlpatterns=[
     path('fav',views.fav_cart,name="fav"),
     path('fav_page',views.fav_page,name="fav_page"),
     path('remove_fav/<str:fid>',views.remove_fav,name="remove_fav"),
+    path('contact',views.contact_us,name="contact"),
 
 ] 

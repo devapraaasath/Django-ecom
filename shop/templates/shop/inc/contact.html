@@ -1,0 +1,177 @@
+{% extends 'shop/layout/main.html' %}
+{% block title %}shopy | Cart{% endblock title %}
+
+{% block script %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - DevHUB</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .contact-container {
+            display: flex;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .contact-left {
+            flex: 1;
+            padding-right: 20px;
+            border-right: 1px solid #ddd;
+        }
+        .contact-right {
+            flex: 1;
+            padding-left: 20px;
+        }
+        .contact-logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .contact-slogan {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .contact-form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .contact-form textarea {
+            resize: none;
+            min-height: 100px;
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            background: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .contact-form button:hover {
+            background: #005bb5;
+        }
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .contact-info a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+        .business-hours {
+            margin-top: 20px;
+        }
+        .business-hours table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .business-hours th, .business-hours td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .contact-social {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .contact-social a {
+            margin: 0 10px;
+            color: #0073e6;
+            font-size: 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <div class="contact-left">
+            <div class="contact-logo">DevHUB</div>
+            <div class="contact-slogan">Find it here</div>
+            <form class="contact-form">
+                <label for="contact-name">Full Name</label>
+                <input type="text" id="contact-name" placeholder="Enter your full name" required>
+                
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" placeholder="Enter your email" required>
+                
+                <label for="contact-inquiry">Business Inquiry</label>
+                <select id="contact-inquiry">
+                    <option>General Inquiry</option>
+                    <option>Partnership</option>
+                    <option>Support Request</option>
+                    <option>Other</option>
+                </select>
+                
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" placeholder="Your Message" required></textarea>
+                
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+        <div class="contact-right">
+            <div class="contact-info">
+                <p><strong>Phone:</strong> <a href="tel:+911234567890">+91 1234 567 890</a></p>
+                <p><strong>Email:</strong> <a href="mailto:support@devhub.com">support@devhub.com</a></p>
+                <p><strong>Address:</strong> <a href="#">View on Google Maps</a></p>
+            </div>
+            <div class="business-hours">
+                <h3>Business Hours</h3>
+                <table>
+                    <tr>
+                        <th>Day</th>
+                        <th>Hours</th>
+                    </tr>
+                    <tr>
+                        <td>Monday - Friday</td>
+                        <td>9:00 AM - 6:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Saturday</td>
+                        <td>10:00 AM - 4:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Sunday</td>
+                        <td>Closed</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="contact-social">
+        <a href="#">🔗 LinkedIn</a>
+        <a href="#">🐦 Twitter</a>
+        <a href="#">📘 Facebook</a>
+    </div>
+</body>
+</html>
+
+{% endblock script %}

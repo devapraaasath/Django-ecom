@@ -127,3 +127,5 @@ def product_details(request,cname,pname):
     else:
         messages.error(request,"no category found") 
         return redirect("collections")
+def contact_us(request):
+    return render(request,'shop/inc/contact.html')

@@ -6,7 +6,7 @@ html{
 
 }
 body {
-    font-family:'Montserrat','sans-serif' ;
+    font-family: 'Orbitron', sans-serif;
     color: #ffffff;
     margin: 0;
     padding: 0;
@@ -22,4 +22,5 @@ a{
     height: 80vh;
     overflow: hidden;
 }
+
 

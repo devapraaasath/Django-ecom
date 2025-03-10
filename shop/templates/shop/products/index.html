@@ -7,186 +7,204 @@ Shopfy | Home
 {% block content %}
     <div class="page-header">
         <div class="header-overlay">
-            <h1>{{category_name}} Collection</h1>
+            <h1>{{ category_name }} Collection</h1>
             <p>Exclusive Deals & Trendy Picks Just for You</p>
         </div>
     </div>
-
-
-        <!-- Product Grid Wrapper (Fixed Position) -->
-        <div class="product-grid">
-            {% for item in products %}
-            <a href="{% url 'product_details' category_name item.name%}">
-                <div class="product-card">
-                    {% if item.product_image %}
-                        <img src="{{ item.product_image.url }}" alt="{{ item.name }}" class="product-image">
-                    {% else %}
-                        <img src="/static/uploads/default.jpg" alt="No Image Available" class="product-image">
-                    {% endif %}
-                    <div class="product-details">
-                        <h3 class="product-name">{{ item.name }}</h3>
-                        <div class="price-container">
-                            <span class="original-price">₹{{ item.original_price }}</span>
-                            <span class="offer-price">₹{{ item.selling_price }}</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            {% endfor %}
-        </div>
-    </a>
-
-    <!-- Updated CSS -->
-    <style>
+    
+    <div class="wrapper">
        
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="{% url 'home' %}"><i class="fas fa-home icon"></i> <p>Home</p></a></li>
+                <li><a href="{% url 'collections' }"><i class="fas fa-th-large icon"></i> <p>Category</p></a></li>
+                <li><a href="#"><i class="fas fa-box-open icon"></i> <p>Products</p></a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <div class="product-grid">
+        {% for item in products %}
+        <div class="product-card">
+            <div class="product-image-container">
+                {% if item.product_image %}
+                    <img src="{{ item.product_image.url }}" alt="{{ item.name }}" class="product-image">
+                {% else %}
+                    <img src="/static/uploads/default.jpg" alt="No Image Available" class="product-image">
+                {% endif %}
+                <button class="favorite-btn"><i class="material-icons">favorite_border</i></button>
+            </div>
+            <div class="product-details">
+                <h3 class="product-name">{{ item.name }}</h3>
+                <div class="price-container">
+                    <span class="original-price">₹{{ item.original_price }}</span>
+                    <span class="offer-price">₹{{ item.selling_price }}</span>
+                </div>
+
+                <a href="{% url 'product_details' category_name item.name %}" class="add-to-cart">View Details</a>
+            
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Merriweather:wght@400;700&display=swap');
+
+
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: 'Merriweather', serif;
     }
     body {
-        font-family: 'Poppins', sans-serif;
         background-color: #F8F9FA;
     }
-/* Page Header - Fully Transparent with Animations */
-.page-header {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    padding: 80px 20px;
-}
 
-/* Header Content */
-.header-overlay {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    margin: auto;
-}
-
-/* Title Styling */
-.page-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #BB86FC; /* Soft Neon Purple */
-    text-shadow: 0px 0px 20px rgba(187, 134, 252, 0.6); /* Subtle Glow */
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInUp 1s ease-out forwards;
-}
-
-/* Subtitle Styling */
-.page-header p {
-    font-size: 1.4rem;
-    opacity: 0.9;
-    color: #E0E0E0;
-    margin-top: 10px;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInUp 1.2s ease-out forwards;
-}
-
-/* Breadcrumb Navigation */
-.breadcrumb {
-    margin-top: 15px;
-    font-size: 1rem;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInUp 1.4s ease-out forwards;
-}
-
-.breadcrumb a {
-    text-decoration: none;
-    color: #03DAC6; /* Soft Neon Cyan */
-    font-weight: bold;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.breadcrumb a:hover {
-    color: #FF5722; /* Vibrant Orange */
-    transform: scale(1.1);
-}
-
-.breadcrumb span {
-    color: #E0E0E0;
-    margin: 0 5px;
-}
-
-.current {
-    font-weight: bold;
-    color: #BB86FC; /* Matches Title */
-}
-
-/* Fade-in Animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+    .breadcrumbs {
+        width: 100%;
+        max-width: 450px;
+        background: #fff;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        border-radius: 50px;
+        padding: 15px;
+        margin: 10px auto;
+        margin-top: 40px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    .breadcrumbs ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
-}
 
+    .breadcrumbs ul li {
+        margin: 5px 15px;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    
+    .breadcrumbs ul li:before {
+        content: ">";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -18px;
+        color: #d1d1d1;
+    }
 
+    .breadcrumbs ul li:last-child:before {
+        display: none;
+    }
+    
+    .breadcrumbs ul li a {
+        display: flex;
+        align-items: center;
+        color: #838080;
+        font-size: 14px;
+    }
+    
+    .breadcrumbs ul li a .icon {
+        margin-right: 5px;
+    }
 
-    /* Product Grid Layout */
+    .breadcrumbs ul li a:hover {
+        color: #ff5e5e;
+    }
+    
+    @media (max-width: 480px) {
+        .breadcrumbs {
+            padding: 10px;
+        }
+
+        .breadcrumbs ul li {
+            margin: 5px 8px;
+        }
+
+        .breadcrumbs ul li a {
+            font-size: 12px;
+        }
+    }
+    /* Product Grid */
     .product-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
-        padding: 50px 20px;
+        padding: 40px;
         justify-items: center;
     }
 
     /* Product Card */
     .product-card {
-        width: 100%;
-        max-width: 280px;
         background: white;
-        border-radius: 15px;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
         text-align: center;
+        width: 100%;
+        max-width: 300px;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        position: relative;
     }
     .product-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Product Image */
+    /* Product Image & Favorite Icon */
+    .product-image-container {
+        position: relative;
+    }
     .product-image {
         width: 100%;
         height: 250px;
         object-fit: cover;
-        overflow: hidden;
         transition: transform 0.3s ease;
     }
     .product-card:hover .product-image {
-        transform: scale(1.05);
+       transform: scale(1.1);
+    }
+    .favorite-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        padding: 8px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .favorite-btn:hover {
+        background: rgba(255, 87, 34, 0.8);
+
+    }
+
+    .favorite-btn i {
+        color: #FF5722;
+        font-size: 20px;
     }
 
     /* Product Details */
     .product-details {
         padding: 15px;
-        text-align: center;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     .product-name {
         font-weight: 600;
         color: #333;
         font-size: 1.2rem;
         margin-bottom: 10px;
-        flex-grow: 1;
+        font-family: "Roboto Mono", monospace;
     }
 
     /* Price Styling */
@@ -206,42 +224,32 @@ Shopfy | Home
         font-size: 1.2rem;
     }
 
-    /* Add to Cart Button */
+    /* Buttons */
+    .view-details {
+        margin-top: 10px;
+        text-decoration: none;
+        color: #1976D2;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    .view-details:hover {
+        color: #FF5722;
+    }
     .add-to-cart {
         width: 100%;
         padding: 12px;
-        background: linear-gradient(135deg, #009688 0%, #1976D2 100%);
+        background: #03DAC6;
         color: white;
         border: none;
         font-weight: 600;
-        transition: all 0.3s ease;
+        transition: all 0.3s;
         cursor: pointer;
-        border-radius: 0 0 15px 15px;
+        border-radius: 0 0 12px 12px;
         margin-top: auto;
+        font-family: "Roboto Mono", monospace;
     }
     .add-to-cart:hover {
-        opacity: 0.9;
-        transform: scale(1.05);
+        background: #1976D2;
     }
-
-    /* Responsive Grid */
-    @media (min-width: 1200px) {
-        .product-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-    @media (min-width: 768px) and (max-width: 1199px) {
-        .product-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (max-width: 767px) {
-        .product-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-
-
     </style>
 {% endblock content %}
